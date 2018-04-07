@@ -13,12 +13,16 @@
   License along with this library; if not, write to the Free Software
   Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
-
-#ifndef _CHILDMIND_NRF51_M3_
-#define _CHILDMIND_NRF51_M3_
+#define NRF52
+#ifndef _VARIANT_CHILDMIND_X9_
+#define _VARIANT_CHILDMIND_X9_
 
 /** Master clock frequency */
+#ifdef NRF52
+#define VARIANT_MCK       (64000000ul)
+#else
 #define VARIANT_MCK       (16000000ul)
+#endif
 
 /*----------------------------------------------------------------------------
  *        Headers
@@ -32,27 +36,26 @@ extern "C"
 #endif // __cplusplus
 
 // Number of pins defined in PinDescription array
-#define PINS_COUNT           (29u)
-#define NUM_DIGITAL_PINS     (29u)
-//#define NUM_ANALOG_INPUTS    (6u)
-  #define NUM_ANALOG_INPUTS    (8u)
+#define PINS_COUNT           (32u)
+#define NUM_DIGITAL_PINS     (32u)
+#define NUM_ANALOG_INPUTS    (6u)
 #define NUM_ANALOG_OUTPUTS   (0u)
 
 // LEDs
-#define PIN_LED              (10)   
+#define PIN_LED              (8) //vibration motor
 #define LED_BUILTIN          PIN_LED
 
 /*
  * Analog pins
  */
-#define PIN_A0               (26)
-#define PIN_A1               (27)
-#define PIN_A2               (1)
-#define PIN_A3               (2)
-#define PIN_A4               (3)
-#define PIN_A5               (4)
-#define PIN_A6               (5)
-#define PIN_A7               (6)
+#define PIN_A0               (2)
+#define PIN_A1               (3)
+#define PIN_A2               (4)
+#define PIN_A3               (5)
+#define PIN_A4               (28)
+#define PIN_A5               (29)
+#define PIN_A6               (30)
+#define PIN_A7               (31)
 
 static const uint8_t A0  = PIN_A0 ;
 static const uint8_t A1  = PIN_A1 ;
@@ -62,13 +65,17 @@ static const uint8_t A4  = PIN_A4 ;
 static const uint8_t A5  = PIN_A5 ;
 static const uint8_t A6  = PIN_A6 ;
 static const uint8_t A7  = PIN_A7 ;
+#ifdef NRF52
+#define ADC_RESOLUTION    14
+#else
 #define ADC_RESOLUTION    10
+#endif
 
 /*
  * Serial interfaces
  */
 // Serial
-#define PIN_SERIAL_RX       (12)
+#define PIN_SERIAL_RX       (14)
 #define PIN_SERIAL_TX       (13)
 
 /*
@@ -76,47 +83,22 @@ static const uint8_t A7  = PIN_A7 ;
  */
 #define SPI_INTERFACES_COUNT 1
 
-#define PIN_SPI_MISO         (30)
-#define PIN_SPI_MOSI         (0)
-#define PIN_SPI_SCK          (21)
+#define PIN_SPI_MISO         (20)
+#define PIN_SPI_MOSI         (19)
+#define PIN_SPI_SCK          (18)
 
-#define PIN_SPI1_MISO         (30) //not used
-#define PIN_SPI1_MOSI         (0)
-#define PIN_SPI1_SCK          (21)
-
-#define PIN_SPI2_MISO         (30) //not used
-#define PIN_SPI2_MOSI         (0)
-#define PIN_SPI2_SCK          (21)
-
-static const uint8_t SS   = 0xFFFFFFFF ;// Use not connected  //5u ;
+static const uint8_t SS   = 24 ;
 static const uint8_t MOSI = PIN_SPI_MOSI ;
 static const uint8_t MISO = PIN_SPI_MISO ;
 static const uint8_t SCK  = PIN_SPI_SCK ;
-
-static const uint8_t SS1   = 0xFFFFFFFF ;// Use not connected  //7u ;
-static const uint8_t MOSI1 = PIN_SPI1_MOSI ;
-static const uint8_t MISO1 = PIN_SPI1_MISO ;
-static const uint8_t SCK1  = PIN_SPI1_SCK ; 
-
-static const uint8_t SS2   = 0xFFFFFFFF ;// Use not connected  //7u ;
-static const uint8_t MOSI2 = PIN_SPI2_MOSI ;
-static const uint8_t MISO2 = PIN_SPI2_MISO ;
-static const uint8_t SCK2  = PIN_SPI2_SCK ; 
 
 /*
  * Wire Interfaces
  */
 #define WIRE_INTERFACES_COUNT 1
 
-#define PIN_WIRE_SDA         (2u)
-#define PIN_WIRE_SCL         (18u)
-
-// TEMP DUMMY
-//#define PIN_WIRE_SDA         (19u)
-//#define PIN_WIRE_SCL         (20u)
-
-static const uint8_t SDA = PIN_WIRE_SDA;
-static const uint8_t SCL = PIN_WIRE_SCL;
+#define PIN_WIRE_SDA         (11u)
+#define PIN_WIRE_SCL         (12u)
 
 #ifdef __cplusplus
 }
